@@ -17,16 +17,38 @@ class PostCreate(generic.CreateView):
 class CategoryCreate(generic.CreateView):
     model = Category
     fields = '__all__'
-
-    def form_valid(self, form):
-        form.save()
-        return render(self.request, 'app/close.html')
+    success_url = reverse_lazy('app:post_list')
 
 
 class TagCreate(generic.CreateView):
     model = Tag
     fields = '__all__'
+    success_url = reverse_lazy('app:post_list')
+
+
+class PopupCategoryCreate(CategoryCreate):
+    model = Category
+    fields = '__all__'
 
     def form_valid(self, form):
-        form.save()
-        return render(self.request, 'app/close.html')
+        category = form.save()
+        context = {
+            'object_name': str(category),
+            'object_pk': category.pk,
+            'function_name': 'add_category'
+        }
+        return render(self.request, 'app/close.html', context)
+
+
+class PopupTagCreate(TagCreate):
+    model = Tag
+    fields = '__all__'
+
+    def form_valid(self, form):
+        tag = form.save()
+        context = {
+            'object_name': str(tag),
+            'object_pk': tag.pk,
+            'function_name': 'add_tag'
+        }
+        return render(self.request, 'app/close.html', context)

@@ -4,12 +4,31 @@
         {{ form.title }}<br>
         {{ form.text }}<br>
         {{ form.category }}
-        <a href="javascript:void(0);" onclick="window.open('{% url 'app:category_create' %}','subwin','width=500,height=500');">+</a>
+        <a href="javascript:void(0);" onclick="window.open('{% url 'app:popup_category_create' %}','subwin','width=500,height=500');">+</a>
         <br>
         {{ form.tag }}
-        <a href="javascript:void(0);" onclick="window.open('{% url 'app:tag_create' %}','subwin','width=500,height=500');">+</a>
+        <a href="javascript:void(0);" onclick="window.open('{% url 'app:popup_tag_create' %}','subwin','width=500,height=500');">+</a>
         <br>
         {%  csrf_token %}
         <button type="submit">送信</button>
     </form>
+    <script>
+        function add_category(name, pk){
+            var select = document.getElementById('id_category');
+            // <option> 要素をつくる
+            var option = document.createElement('option');
+            option.setAttribute('value', pk);
+            option.innerHTML = name;
+            select.appendChild(option);
+        }
+
+        function add_tag(name, pk){
+            var select = document.getElementById('id_tag');
+            // <option> 要素をつくる
+            var option = document.createElement('option');
+            option.setAttribute('value', pk);
+            option.innerHTML = name;
+            select.appendChild(option);
+        }
+    </script>
 {% endblock %}
