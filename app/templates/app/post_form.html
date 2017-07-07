@@ -1,0 +1,15 @@
+{% extends 'app/base.html' %}
+{% block content %}
+    <form action="" method="POST">
+        {{ form.title }}<br>
+        {{ form.text }}<br>
+        {{ form.category }}
+        <a href="javascript:void(0);" onclick="window.open('{% url 'app:category_create' %}','subwin','width=500,height=500');">+</a>
+        <br>
+        {{ form.tag }}
+        <a href="javascript:void(0);" onclick="window.open('{% url 'app:tag_create' %}','subwin','width=500,height=500');">+</a>
+        <br>
+        {%  csrf_token %}
+        <button type="submit">送信</button>
+    </form>
+{% endblock %}

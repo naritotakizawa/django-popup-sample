@@ -1,0 +1,9 @@
+{% extends 'app/base.html' %}
+{% block content %}
+<a href="{% url 'app:post_create' %}">作成</a>
+<hr>
+    {% for post in post_list %}
+        {{ post.title }}
+        <hr>
+    {% endfor %}
+{% endblock %}
